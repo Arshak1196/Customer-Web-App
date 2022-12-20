@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 mongoose.set('strictQuery',false)
 
+//data base connection (Mongodb)
 
 class Database {
     constructor() {
