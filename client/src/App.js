@@ -1,19 +1,22 @@
 import './App.css';
+import Navbar from './Components/Navbar/Navbar';
+import SideBar from './Components/SideBar/SideBar';
+import CustomerDetails from './Components/CustomerDetails/CustomerDetails';
+import { Grid } from '@mui/material';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Grid container>
+        <Grid item md={3} >
+          <SideBar/>
+        </Grid>
+        <Grid item md={9}>
+          <CustomerDetails/>
+        </Grid>
+      </Grid>
     </div>
   );
 }
