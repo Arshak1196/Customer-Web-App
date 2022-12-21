@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 mongoose.set('strictQuery',false)
+import dotenv from 'dotenv'
+dotenv.config()
 
 //data base connection (Mongodb)
 
@@ -13,6 +15,7 @@ class Database {
                 console.log("db connection successfull");
             })
             .catch(err => {
+                console.log(err)
                 console.error('db connection error');
             })
     }

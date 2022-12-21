@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 const Schema = mongoose.Schema;
 
 //address collection Schema
@@ -28,3 +28,5 @@ const addressSchema = new Schema({
         type: Number
     }
 }, { timestamps: true })
+
+export default mongoose.model('Address',addressSchema)

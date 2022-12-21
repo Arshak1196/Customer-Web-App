@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+dotenv.config()
 import cors from 'cors'
 
 import {db} from './config/db.js'
@@ -7,7 +8,6 @@ import { ErrorHandler } from './middleware/errorHandler.js'
 import customerRoute from './routes/customer.js'
 
 const app=express()
-dotenv.config()
 
 //middlewares
 app.use(express.json())
