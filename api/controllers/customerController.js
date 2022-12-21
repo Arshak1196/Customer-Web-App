@@ -70,3 +70,50 @@ export const addCustomerAddress = async (req,res,next)=>{
         next(error)
     }
 }
+
+//update Customer Details
+export const updateCustomerDetails = async (req,res,next)=>{
+    try {
+        const customer = await Customer.findById(req.params.id)
+        if(!customer) return next(createError(400,'Invalid Customer Id'))
+        await Customer.findByIdAndUpdate(req.params.id,req.body)
+        res.status(200).json({updated:true})
+    } catch (error) {
+        next(error)
+    }
+}
+
+//Update Customer Address Details
+export const updateCustomerAddress = async(req,res,next)=>{
+    try {
+        const address= await Address.find({customerId:req.params.id})
+        if(address[0]){
+            await Address.updateOne({customerId:req.params._id},
+                {$set:req.body},
+                { new: true }
+                )
+        }else{
+            const customerAddress={...req.body,customerId:req.params.id}
+            await new Address(customerAddress).save()
+        }
+        res.status(200).json({updated:true})
+    } catch (error) {
+        next(error)
+    }
+}
+
+//delete Customer Details and Address from DataBase
+export const deleteCustomerDetails = async (req,res,next)=>{
+    try {
+        const customer = await Customer.findById(req.params.id)
+        const address=await Address.find({customerId:req.params.id})
+        if(!customer) return next(createError(400,'Invalid Customer Id'))
+        await Customer.findByIdAndDelete(req.params.id)
+        if(address[0]){
+            await Address.deleteOne({customerId:req.params.id})
+        }
+        res.status(200).json({deleted:true})
+    } catch (error) {
+        next(error)
+    }
+}
