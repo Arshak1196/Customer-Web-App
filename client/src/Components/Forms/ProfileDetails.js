@@ -1,10 +1,12 @@
-import { Grid, TextField } from '@mui/material'
+import { Button, Grid, TextField } from '@mui/material'
+import { Box } from '@mui/system';
 import { useForm } from 'react-hook-form'
 
-function ProfileDetails() {
+function ProfileDetails({ close, next }) {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     return (
+        <>
         <Grid container direction='row'>
             <Grid item md={12} sx={{ pr: 2 }}>
                 <Grid item xs={12} sx={{ mb: 2, mt: 1 }} >
@@ -26,7 +28,7 @@ function ProfileDetails() {
                         required
                         className='loginInput'
                         {...register("country", { required: true })}
-                    />
+                        />
                     {errors.company?.type === 'required' && <p className="required-mark">Country is required</p>}
                 </Grid>
                 <Grid item xs={12} sx={{ mb: 2, mt: 1 }} >
@@ -64,10 +66,16 @@ function ProfileDetails() {
                 </Grid>
                 
             </Grid>
-
-
-
         </Grid>
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', pt: 2 }}>
+                <Button onClick={close} variant='outlined' color='error'>
+                    Cancel
+                </Button>
+                <Button onClick={next} variant='contained' >
+                    Save
+                </Button>
+            </Box>
+                        </>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, Grid, IconButton, List, ListItem, ListItemText, NativeSelect, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
+import { Button, Dialog, DialogContent, DialogTitle, Divider, FormControl, Grid, IconButton, List, ListItem, ListItemText, NativeSelect, Step, StepLabel, Stepper, TextField, Typography } from '@mui/material'
 import './SideBar.css'
 import { Box } from '@mui/system';
 import LoginDetails from '../Forms/LoginDetails';
@@ -74,16 +74,8 @@ function SideBar({ customers }) {
                                 <React.Fragment>
                                     <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
 
-                                    {activeStep === 0 && <LoginDetails />}
-                                    {activeStep === 1 && <ProfileDetails />}
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'space-between',alignItems:'center', pt: 2 }}>
-                                        <Button onClick={handleClose} variant='outlined' color='error'>
-                                            Cancel
-                                        </Button>
-                                        <Button onClick={handleNext} variant='contained' >
-                                            {activeStep === steps.length - 1 ? 'Save' : 'Proceed'}
-                                        </Button>
-                                    </Box>
+                                    {activeStep === 0 && <LoginDetails close={handleClose} next={handleNext} />}
+                                    {activeStep === 1 && <ProfileDetails close={handleClose} next={handleNext} />}
                                 </React.Fragment>
                             )}
                         </Box>
@@ -118,13 +110,10 @@ function SideBar({ customers }) {
                                 </ListItem>
                                 <Divider />
                             </>
-
                         )
                     })}
-
                 </List>
             </Grid>
-
         </div>
     )
 }
